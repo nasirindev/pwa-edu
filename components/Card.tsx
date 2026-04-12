@@ -15,14 +15,19 @@ export const Card = ({
   noPadding = false,
 }: CardProps) => (
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    className={`relative z-10 w-full ${maxWidth} max-h-[95vh] bg-white flex flex-col rounded-[40px] shadow-2xl border-b-8 border-brand-muted ${className}`}
+    initial={{ opacity: 0, scale: 0.9 }} // Gunakan scale agar lebih aman daripada Y offset besar
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ type: "spring", duration: 0.5 }}
+    className={`
+      relative z-10 w-full ${maxWidth} 
+      /* Hapus atau perbesar max-h untuk testing */
+      bg-white flex flex-col 
+      rounded-[40px] shadow-2xl border-b-8 border-brand-muted 
+      ${className}
+    `}
   >
-    {/* overflow-x-hidden hanya di level scroll container agar h-scroll hilang 
-        tapi overflow-visible di parent tetap bisa menampilkan bintang melayang */}
     <div
-      className={`overflow-y-auto overflow-x-hidden no-scrollbar rounded-[40px] ${noPadding ? "" : "p-4 md:p-6"}`}
+      className={`overflow-x-hidden no-scrollbar ${noPadding ? "" : "p-4 md:p-6"}`}
     >
       {children}
     </div>

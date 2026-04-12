@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import { LucideIcon } from "lucide-react";
 
 interface DecorationProps {
@@ -31,13 +31,15 @@ export const LayoutWrapper = ({
   children: React.ReactNode;
   className?: string;
 }) => (
-  <main
-    className={`
-    relative min-h-screen w-full 
-    overflow-hidden flex items-center justify-center 
-    p-4 md:p-8 ${className}
-  `}
-  >
-    {children}
-  </main>
+  <MotionConfig reducedMotion="never">
+    <main
+      className={`
+      relative min-h-dvh w-full 
+      flex items-center justify-center 
+      p-4 md:p-8 overflow-hidden ${className}
+    `}
+    >
+      {children}
+    </main>
+  </MotionConfig>
 );

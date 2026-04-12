@@ -1,17 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Quicksand } from "next/font/google";
 import "./globals.css";
+import PwaRegistration from "@/components/PwaRegistration";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
 const quicksand = Quicksand({
   variable: "--font-quicksand",
   subsets: ["latin"],
@@ -26,7 +22,11 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  icons: "/icon.ico",
+  manifest: "/manifest.json", // WAJIB ADA untuk PWA
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
   title: "Media Belajar SD - Pintar Bersama",
   description: "Aplikasi belajar interaktif seru untuk anak sekolah dasar",
   appleWebApp: { capable: true, statusBarStyle: "default", title: "BelajarSD" },
@@ -41,9 +41,12 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} ${quicksand.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${quicksand.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-dvh flex flex-col overflow-x-hidden">
+        <PwaRegistration />
+        {children}
+      </body>
     </html>
   );
 }

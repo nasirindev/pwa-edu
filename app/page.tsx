@@ -18,9 +18,23 @@ import { motion } from "framer-motion";
 import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
 import { Input } from "@/components/input";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    // Registrasi Service Worker hanya di browser
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/sw.js") // Pastikan file sw kamu ada di public/sw.js
+          .then((reg) => console.log("SW Terdaftar!", reg.scope))
+          .catch((err) => console.error("SW Gagal:", err));
+      });
+    }
+  }, []);
+
   return (
     <LayoutWrapper className="bg-yellow-50/30">
       {/* --- DEKORASI LATAR BELAKANG --- */}
