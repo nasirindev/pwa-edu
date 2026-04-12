@@ -1,150 +1,137 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
+import {
+  Sun,
+  Cloud,
+  Star,
+  LogIn,
+  User,
+  Lock,
+  Sparkles,
+  Triangle,
+  Circle,
+  Zap,
+} from "lucide-react";
 import { motion } from "framer-motion";
-import { BookOpen, Rocket, Trophy, Star, PlayCircle } from "lucide-react";
+import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
+import { Input } from "@/components/input";
+import { useRouter } from "next/navigation";
 
-export default function HomePage() {
-  const categories = [
-    {
-      title: "Matematika",
-      icon: <Rocket className="w-8 h-8" />,
-      color: "bg-brand-accent", // Menggunakan Oranye kustom
-      count: "12 Materi",
-    },
-    {
-      title: "Bahasa Indonesia",
-      icon: <BookOpen className="w-8 h-8" />,
-      color: "bg-brand-info", // Menggunakan Biru kustom
-      count: "8 Materi",
-    },
-    {
-      title: "Sains & IPA",
-      icon: <Star className="w-8 h-8" />,
-      color: "bg-brand-success", // Menggunakan Hijau kustom
-      count: "10 Materi",
-    },
-    {
-      title: "Kuis Seru",
-      icon: <Trophy className="w-8 h-8" />,
-      color: "bg-purple-500",
-      count: "15 Kuis",
-    },
-  ];
-
-  useEffect(() => {
-    // Cek apakah browser mendukung service worker
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js") // Mengambil file dari folder public
-          .then((registration) => {
-            console.log("SW terdaftar dengan scope:", registration.scope);
-          })
-          .catch((err) => {
-            console.log("SW gagal didaftarkan:", err);
-          });
-      });
-    }
-  }, []);
-
+export default function LoginPage() {
+  const router = useRouter();
   return (
-    <main className="flex-1 bg-yellow-50/30">
-      {/* Hero Section */}
-      <section className="relative px-6 pt-16 pb-12 overflow-hidden bg-white rounded-b-[40px] shadow-sm">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-block px-4 py-1 mb-4 text-sm font-bold text-brand-primary bg-indigo-50 rounded-full uppercase tracking-wider">
-              Selamat Datang, Sobat Pintar! 👋
-            </span>
-            <h1 className="mb-6 text-4xl font-extrabold tracking-tight text-gray-900 md:text-6xl">
-              Belajar Jadi{" "}
-              <span className="text-brand-primary">Lebih Seru</span> &
-              Berpetualang!
-            </h1>
-            <p className="mb-10 text-lg text-gray-600 md:text-xl">
-              Pilih materi favoritmu dan kumpulkan bintang sebanyak-banyaknya
-              hari ini.
-            </p>
+    <LayoutWrapper className="bg-yellow-50/30">
+      {/* --- DEKORASI LATAR BELAKANG --- */}
+      {/* Matahari Berputar */}
+      <Decoration
+        icon={<Sun size={100} strokeWidth={1.5} />}
+        className="top-[5%] left-[5%] text-brand-secondary opacity-40"
+        animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
 
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <button className="btn-bounce flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-white transition-all bg-brand-primary rounded-2xl hover:bg-indigo-700 shadow-lg shadow-indigo-200">
-                <PlayCircle className="w-6 h-6" />
-                Mulai Belajar
-              </button>
-              <button className="btn-bounce flex items-center justify-center gap-2 px-8 py-4 text-lg font-bold text-brand-primary transition-all bg-white border-2 border-brand-muted rounded-2xl hover:bg-brand-muted">
-                Lihat Ranking
-              </button>
+      {/* Awan Berjalan */}
+      <Decoration
+        icon={<Cloud size={120} />}
+        className="top-[15%] right-[10%] text-blue-200 opacity-60"
+        animate={{ x: [-20, 20, -20], y: [0, 10, 0] }}
+        transition={{ duration: 6, repeat: Infinity }}
+      />
+
+      {/* Bangun Datar Melayang (Kiri Bawah) */}
+      <Decoration
+        icon={<Triangle size={60} className="text-brand-success rotate-12" />}
+        className="bottom-[15%] left-[10%] opacity-30"
+        animate={{ y: [0, -40, 0], rotate: [0, 90, 0] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+
+      {/* Bangun Datar Melayang (Kanan Bawah) */}
+      <Decoration
+        icon={
+          <Circle size={50} fill="currentColor" className="text-brand-accent" />
+        }
+        className="bottom-[10%] right-[15%] opacity-20"
+        animate={{ scale: [1, 1.5, 1], x: [0, 30, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
+      />
+
+      {/* --- KARTU LOGIN --- */}
+      <Card maxWidth="max-w-md" noPadding className="overflow-visible">
+        {/* Header Kartu dengan Animasi */}
+        <div className="bg-brand-primary p-10 text-center text-white relative rounded-t-4xl overflow-hidden">
+          {/* Efek Sparkles Berkedip */}
+          <motion.div
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute top-4 right-6 text-yellow-300"
+          >
+            <Sparkles size={24} />
+          </motion.div>
+
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", damping: 10 }}
+          >
+            <h2 className="text-4xl font-black mb-1 drop-shadow-md">
+              Halo Teman! 👋
+            </h2>
+            <div className="flex items-center justify-center gap-2">
+              <Zap size={16} className="text-brand-secondary fill-current" />
+              <p className="text-indigo-100 font-bold tracking-wide text-sm">
+                SIAP JADI JUARA HARI INI?
+              </p>
+              <Zap size={16} className="text-brand-secondary fill-current" />
             </div>
           </motion.div>
+
+          {/* Dekorasi lengkung di bawah header */}
+          <div className="absolute bottom-0 left-0 right-0 h-2 bg-white/10" />
         </div>
 
-        {/* Dekorasi Latar Belakang */}
-        <div className="absolute top-0 right-0 p-8 opacity-5">
-          <Rocket className="w-32 h-32 text-brand-primary rotate-12" />
-        </div>
-        <div className="absolute bottom-0 left-0 p-8 opacity-10">
-          <Star className="w-24 h-24 text-brand-secondary -rotate-12" />
-        </div>
-      </section>
+        {/* Form Area */}
+        <form className="p-10 space-y-5" onSubmit={(e) => e.preventDefault()}>
+          <Input
+            label="Nama Pengguna"
+            placeholder="Siapa namamu?"
+            icon={<User size={22} />}
+          />
 
-      {/* Categories Grid */}
-      <section className="max-w-6xl px-6 py-16 mx-auto">
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-2xl font-bold text-gray-800 md:text-3xl">
-            Pilih Petualanganmu
-          </h2>
-          <button className="text-sm font-bold text-brand-primary hover:underline">
-            Lihat Semua
-          </button>
-        </div>
+          <Input
+            label="Kata Sandi"
+            type="password"
+            placeholder="Ketik kode rahasiamu"
+            icon={<Lock size={22} />}
+          />
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((item, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ y: -10 }}
-              className="p-6 transition-all bg-white border-b-4 border-brand-muted cursor-pointer rounded-3xl hover:border-brand-primary shadow-sm"
+          <div className="pt-4">
+            <Button
+              variant="secondary"
+              className="w-full text-2xl py-6 rounded-4xl"
+              icon={<LogIn size={28} strokeWidth={3} />}
+              onClick={() => router.push("/wellcome")}
             >
-              <div
-                className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg`}
-              >
-                {item.icon}
-              </div>
-              <h3 className="mb-2 text-xl font-bold text-gray-800">
-                {item.title}
-              </h3>
-              <p className="text-sm font-medium text-gray-500">{item.count}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Info Section / Gamification */}
-      <section className="px-6 pb-20">
-        <div className="max-w-5xl p-8 mx-auto text-white bg-brand-primary md:p-12 rounded-[40px] shadow-2xl relative overflow-hidden">
-          <div className="relative z-10 flex flex-col items-center gap-8 md:flex-row">
-            <div className="flex-1">
-              <h2 className="mb-4 text-3xl font-bold">
-                Siap Jadi Juara Kelas? 🏆
-              </h2>
-              <p className="text-indigo-100 md:text-lg">
-                Selesaikan misi harian, jawab kuis dengan benar, dan dapatkan
-                lencana eksklusif untuk profilmu!
-              </p>
-            </div>
-            <button className="btn-bounce px-8 py-4 text-lg font-bold text-brand-primary bg-brand-secondary rounded-2xl hover:bg-yellow-300 transition-colors shadow-md">
-              Cek Misi Harian
-            </button>
+              GAS BELAJAR!
+            </Button>
           </div>
-          {/* Efek Lingkaran Dekorasi */}
-          <div className="absolute top-[-50px] right-[-50px] w-64 h-64 bg-indigo-500 rounded-full opacity-50" />
-        </div>
-      </section>
-    </main>
+
+          <p className="text-center text-gray-400 text-xs font-bold uppercase tracking-widest mt-4">
+            Lupa sandi? Tanya gurumu ya! 😊
+          </p>
+        </form>
+
+        {/* Floating Star Decoration (Keluar dari Card) */}
+        <motion.div
+          animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute -top-6 -left-6 bg-brand-secondary p-3 rounded-2xl shadow-lg border-4 border-white text-brand-primary z-20"
+        >
+          <Star fill="currentColor" size={32} />
+        </motion.div>
+      </Card>
+    </LayoutWrapper>
   );
 }

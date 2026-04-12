@@ -53,3 +53,7 @@ body {
     @apply active:scale-95 transition-transform duration-100;
   }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
