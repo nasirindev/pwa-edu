@@ -13,14 +13,44 @@ import {
   Triangle,
   Circle,
   Zap,
+  School,
+  GraduationCap,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
 import { Input } from "@/components/input";
 import { useRouter } from "next/navigation";
+import z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LoginPage() {
   const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      console.log("Data yang dikirim ke Prisma:", data);
+
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        router.push("/wellcome");
+      }
+    } catch (error) {
+      console.error("Gagal simpan data:", error);
+    }
+  };
 
   return (
     <LayoutWrapper className="bg-yellow-50/30">
@@ -94,18 +124,28 @@ export default function LoginPage() {
         </div>
 
         {/* Form Area */}
-        <form className="p-10 space-y-5" onSubmit={(e) => e.preventDefault()}>
+        <form className="p-10 space-y-5" onSubmit={handleSubmit(onSubmit)}>
           <Input
-            label="Nama Pengguna"
-            placeholder="Siapa namamu?"
+            label="Nama Lengkap"
+            placeholder="Ketik namamu di sini"
             icon={<User size={22} />}
+            {...register("fullName")}
+            error={errors.fullName?.message}
+          />
+          <Input
+            label="Nama Sekolah"
+            placeholder="Sekolah di mana?"
+            icon={<School size={22} />}
+            {...register("schoolName")}
+            error={errors.schoolName?.message}
           />
 
           <Input
-            label="Kata Sandi"
-            type="password"
-            placeholder="Ketik kode rahasiamu"
-            icon={<Lock size={22} />}
+            label="Kelas"
+            placeholder="Contoh: 4 SD"
+            icon={<GraduationCap size={22} />}
+            {...register("grade")}
+            error={errors.grade?.message}
           />
 
           <div className="pt-4">
@@ -118,10 +158,6 @@ export default function LoginPage() {
               GAS BELAJAR!
             </Button>
           </div>
-
-          <p className="text-center text-gray-400 text-xs font-bold uppercase tracking-widest mt-4">
-            Lupa sandi? Tanya gurumu ya! 😊
-          </p>
         </form>
 
         {/* Floating Star Decoration (Keluar dari Card) */}
@@ -136,3 +172,11 @@ export default function LoginPage() {
     </LayoutWrapper>
   );
 }
+
+const loginSchema = z.object({
+  fullName: z.string().min(3, "Nama lengkap minimal 3 huruf ya!"),
+  schoolName: z.string().min(2, "Nama sekolah jangan dikosongkan"),
+  grade: z.string().min(1, "Pilih kelasmu dulu"),
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
