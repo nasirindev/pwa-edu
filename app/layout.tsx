@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  icons: "/edu-icon.png",
+  icons: "/icon.ico",
   title: "Media Belajar SD - Pintar Bersama",
   description: "Aplikasi belajar interaktif seru untuk anak sekolah dasar",
   appleWebApp: { capable: true, statusBarStyle: "default", title: "BelajarSD" },

@@ -2,7 +2,7 @@ const CACHE_NAME = "media-belajar-v1";
 const ASSETS_TO_CACHE = [
   "/",
   "/manifest.json",
-  "/edu-icon.png",
+  "/icon.png",
   // Tambahkan path aset statis lainnya di sini jika sudah ada
 ];
 
@@ -64,8 +64,8 @@ self.addEventListener("push", (event) => {
 
   const options = {
     body: data.body,
-    icon: "/edu-icon.png", // Ikon aplikasi
-    badge: "/edu-icon.png", // Ikon kecil di bar notifikasi
+    icon: "/icon.png", // Ikon aplikasi
+    badge: "/icon.png", // Ikon kecil di bar notifikasi
     vibrate: [100, 50, 100],
     data: {
       url: "/",
