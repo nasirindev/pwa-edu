@@ -35,11 +35,13 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   });
 
+  console.log("needs ", { errors });
+
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      console.log("Data yang dikirim ke Prisma:", data);
+      console.log("needs Data yang dikirim ke Prisma:", data);
 
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("/api/auth", {
         method: "POST",
         body: JSON.stringify(data),
       });
@@ -150,10 +152,10 @@ export default function LoginPage() {
 
           <div className="pt-4">
             <Button
+              type="submit"
               variant="secondary"
               className="w-full text-2xl py-6 rounded-4xl"
               icon={<LogIn size={28} strokeWidth={3} />}
-              onClick={() => router.push("/wellcome")}
             >
               GAS BELAJAR!
             </Button>

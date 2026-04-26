@@ -17,6 +17,7 @@ import { Button } from "@/components/Button";
 import { Card } from "@/components/Card";
 import { motion } from "framer-motion";
 import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
+import Image from "next/image";
 
 export default function WelcomePage() {
   const router = useRouter();
@@ -61,12 +62,14 @@ export default function WelcomePage() {
 
         {/* Header: Logo Section */}
         <div className="flex justify-between items-center mb-10">
-          <div className="w-16 h-16 bg-indigo-50 border-4 border-dashed border-brand-primary/20 rounded-2xl flex items-center justify-center p-1 group hover:border-brand-primary transition-colors">
-            <span className="text-[9px] font-black text-brand-primary text-center leading-tight">
-              LOGO
-              <br />
-              SEKOLAH
-            </span>
+          <div className="w-16 h-16 overflow-hidden bg-indigo-50 border-4 border-dashed border-brand-primary/20 rounded-2xl flex items-center justify-center p-1 group hover:border-brand-primary transition-colors">
+            <Image
+              alt="logo-unisulla"
+              src={"/unisula.jpeg"}
+              width={100}
+              height={100}
+              className="w-full h-full rounded-2xl"
+            />
           </div>
 
           <motion.div
@@ -78,11 +81,13 @@ export default function WelcomePage() {
           </motion.div>
 
           <div className="w-16 h-16 bg-yellow-50 border-4 border-dashed border-brand-secondary/20 rounded-2xl flex items-center justify-center p-1 group hover:border-brand-secondary transition-colors">
-            <span className="text-[9px] font-black text-brand-secondary text-center leading-tight">
-              LOGO
-              <br />
-              APP
-            </span>
+            <Image
+              alt="logo-unisulla"
+              src={"/fkip.jpeg"}
+              width={100}
+              height={100}
+              className="w-full h-full rounded-2xl"
+            />
           </div>
         </div>
 
@@ -91,7 +96,7 @@ export default function WelcomePage() {
           <motion.h1
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-[1] tracking-tighter"
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-none tracking-tighter"
           >
             MEDIA <span className="text-brand-primary">APLIKASI</span> <br />
             <span className="text-brand-secondary drop-shadow-sm">

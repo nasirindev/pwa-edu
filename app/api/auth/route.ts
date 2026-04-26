@@ -8,6 +8,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { fullName, schoolName, grade } = body;
 
+    console.log("needs ", body);
+
     const newStudent = await prisma.student.create({
       data: {
         fullName,
