@@ -11,6 +11,8 @@ import {
   Trophy,
   Rocket,
   Star,
+  Sun,
+  Cloud,
 } from "lucide-react";
 
 import { Button } from "@/components/Button";
@@ -25,27 +27,39 @@ export default function WelcomePage() {
   return (
     <LayoutWrapper className="bg-yellow-50/30">
       {/* --- DEKORASI LATAR BELAKANG --- */}
+      {/* Matahari Berputar */}
       <Decoration
-        icon={<Box size={120} strokeWidth={1} />}
-        className="top-[10%] left-[8%] text-white/10"
-        animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        icon={<Sun size={100} strokeWidth={1.5} />}
+        className="top-[5%] left-[5%] text-brand-secondary opacity-40"
+        animate={{ rotate: 360, scale: [1, 1.1, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
       />
 
+      {/* Awan Berjalan */}
       <Decoration
-        icon={<Circle size={100} fill="currentColor" />}
-        className="bottom-[15%] right-[10%] text-brand-secondary/20"
-        animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
+        icon={<Cloud size={120} />}
+        className="top-[15%] right-[10%] text-blue-200 opacity-60"
+        animate={{ x: [-20, 20, -20], y: [0, 10, 0] }}
+        transition={{ duration: 6, repeat: Infinity }}
+      />
+
+      {/* Bangun Datar Melayang (Kiri Bawah) */}
+      <Decoration
+        icon={<Triangle size={60} className="text-brand-success rotate-12" />}
+        className="bottom-[15%] left-[10%] opacity-30"
+        animate={{ y: [0, -40, 0], rotate: [0, 90, 0] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
 
+      {/* Bangun Datar Melayang (Kanan Bawah) */}
       <Decoration
-        icon={<Triangle size={80} strokeWidth={1.5} />}
-        className="top-[20%] right-[15%] text-brand-success/20"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+        icon={
+          <Circle size={50} fill="currentColor" className="text-brand-accent" />
+        }
+        className="bottom-[10%] right-[15%] opacity-20"
+        animate={{ scale: [1, 1.5, 1], x: [0, 30, 0] }}
+        transition={{ duration: 5, repeat: Infinity }}
       />
-
       {/* --- KONTEN UTAMA --- */}
       <Card
         maxWidth="max-w-5xl"
@@ -137,7 +151,7 @@ export default function WelcomePage() {
 
           <Button
             variant="secondary"
-            // onClick={() => router.push("/dashboard")}
+            onClick={() => router.push("/home")}
             className="w-full sm:w-auto text-3xl py-6 px-12"
             icon={<ChevronRight size={36} strokeWidth={4} />}
           >

@@ -22,7 +22,7 @@ export default function proxy(request: NextRequest) {
 
   // B. Jika SUDAH login dan mencoba mengakses halaman "/" (halaman awal/login)
   if (token && isRootPage) {
-    return NextResponse.redirect(new URL("/home", request.url));
+    return NextResponse.redirect(new URL("/wellcome", request.url));
   }
 
   return NextResponse.next();

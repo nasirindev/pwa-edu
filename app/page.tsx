@@ -47,7 +47,8 @@ export default function LoginPage() {
       });
 
       if (response.ok) {
-        router.push("/wellcome");
+        // Diarahkan ke /home agar sesuai dengan logika pengecekan di proxy.ts
+        router.push("/home");
       }
     } catch (error) {
       console.error("Gagal simpan data:", error);
