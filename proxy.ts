@@ -1,37 +1,39 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export default function proxy(request: NextRequest) {
-  // 1. Ambil token dari cookie
-  const token = request.cookies.get("auth-token")?.value;
+// 1. Halaman yang bebas diakses siapapun (Public)
+const PUBLIC_ROUTES = ["/"];
 
-  // 2. Ambil path yang sedang diakses
+// 2. Halaman yang HANYA boleh diakses jika BELUM login (Guest Only)
+// Jika sudah login, akses ke sini akan dilempar ke /home
+const GUEST_ONLY_ROUTES = ["/auth"];
+
+export default function middleware(request: NextRequest) {
+  const token = request.cookies.get("auth-token")?.value;
   const { pathname } = request.nextUrl;
 
-  // 3. Tentukan halaman publik/root
-  // Di sini kita anggap "/" adalah halaman login atau landing page utama
-  const isRootPage = pathname === "/";
-  const isPublicFile = pathname.match(/\.(.*)$/); // Hindari blocking file statis (images, dsb)
+  // Cek file statis
+  const isPublicFile = pathname.match(/\.(.*)$/);
+  if (isPublicFile) return NextResponse.next();
 
-  // 4. Logika Proteksi:
+  const isGuestRoute = GUEST_ONLY_ROUTES.includes(pathname);
+  const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
 
-  // A. Jika BELUM login dan mencoba mengakses halaman selain "/" atau file statis
-  if (!token && !isRootPage && !isPublicFile) {
+  // LOGIKA A: Jika BELUM login
+  // Mencoba akses halaman selain "/" dan "/auth" -> Tendang ke "/"
+  if (!token && !isGuestRoute && !isPublicRoute) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // B. Jika SUDAH login dan mencoba mengakses halaman "/" (halaman awal/login)
-  if (token && isRootPage) {
-    return NextResponse.redirect(new URL("/wellcome", request.url));
+  // LOGIKA B: Jika SUDAH login
+  // Mencoba akses halaman "/auth" -> Tendang ke "/home"
+  if (token && isGuestRoute) {
+    return NextResponse.redirect(new URL("/home", request.url));
   }
 
   return NextResponse.next();
 }
 
-// 5. Konfigurasi Matcher
 export const config = {
-  /*
-   * Match semua rute kecuali rute internal Next.js dan API
-   */
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

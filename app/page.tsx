@@ -1,59 +1,28 @@
 "use client";
 
-import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
+import React from "react";
+import { useRouter } from "next/navigation";
 import {
+  ChevronRight,
+  Box,
+  Circle,
+  Triangle,
+  Sparkles,
+  Trophy,
+  Rocket,
+  Star,
   Sun,
   Cloud,
-  Star,
-  LogIn,
-  User,
-  Lock,
-  Sparkles,
-  Triangle,
-  Circle,
-  Zap,
-  School,
-  GraduationCap,
 } from "lucide-react";
+
+import { Button } from "@/components/Button";
+import { Card } from "@/components/Card";
 import { motion } from "framer-motion";
 import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
-import { Input } from "@/components/input";
-import { useRouter } from "next/navigation";
-import z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 
-export default function LoginPage() {
+export default function WelcomePage() {
   const router = useRouter();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
-  });
-
-  console.log("needs ", { errors });
-
-  const onSubmit = async (data: LoginFormValues) => {
-    try {
-      console.log("needs Data yang dikirim ke Prisma:", data);
-
-      const response = await fetch("/api/auth", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        // Diarahkan ke /home agar sesuai dengan logika pengecekan di proxy.ts
-        router.push("/home");
-      }
-    } catch (error) {
-      console.error("Gagal simpan data:", error);
-    }
-  };
 
   return (
     <LayoutWrapper className="bg-yellow-50/30">
@@ -91,95 +60,108 @@ export default function LoginPage() {
         animate={{ scale: [1, 1.5, 1], x: [0, 30, 0] }}
         transition={{ duration: 5, repeat: Infinity }}
       />
-
-      {/* --- KARTU LOGIN --- */}
-      <Card maxWidth="max-w-md" noPadding className="overflow-visible">
-        {/* Header Kartu dengan Animasi */}
-        <div className="bg-brand-primary p-10 text-center text-white relative rounded-t-4xl overflow-hidden">
-          {/* Efek Sparkles Berkedip */}
-          <motion.div
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="absolute top-4 right-6 text-yellow-300"
-          >
-            <Sparkles size={24} />
-          </motion.div>
-
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", damping: 10 }}
-          >
-            <h2 className="text-4xl font-black mb-1 drop-shadow-md">
-              Halo Teman! 👋
-            </h2>
-            <div className="flex items-center justify-center gap-2">
-              <Zap size={16} className="text-brand-secondary fill-current" />
-              <p className="text-indigo-100 font-bold tracking-wide text-sm">
-                SIAP JADI JUARA HARI INI?
-              </p>
-              <Zap size={16} className="text-brand-secondary fill-current" />
-            </div>
-          </motion.div>
-
-          {/* Dekorasi lengkung di bawah header */}
-          <div className="absolute bottom-0 left-0 right-0 h-2 bg-white/10" />
-        </div>
-
-        {/* Form Area */}
-        <form className="p-10 space-y-5" onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Nama Lengkap"
-            placeholder="Ketik namamu di sini"
-            icon={<User size={22} />}
-            {...register("fullName")}
-            error={errors.fullName?.message}
-          />
-          <Input
-            label="Nama Sekolah"
-            placeholder="Sekolah di mana?"
-            icon={<School size={22} />}
-            {...register("schoolName")}
-            error={errors.schoolName?.message}
-          />
-
-          <Input
-            label="Kelas"
-            placeholder="Contoh: 4 SD"
-            icon={<GraduationCap size={22} />}
-            {...register("grade")}
-            error={errors.grade?.message}
-          />
-
-          <div className="pt-4">
-            <Button
-              type="submit"
-              variant="secondary"
-              className="w-full text-2xl py-6 rounded-4xl"
-              icon={<LogIn size={28} strokeWidth={3} />}
-            >
-              GAS BELAJAR!
-            </Button>
-          </div>
-        </form>
-
-        {/* Floating Star Decoration (Keluar dari Card) */}
+      {/* --- KONTEN UTAMA --- */}
+      <Card
+        maxWidth="max-w-5xl"
+        className="p-6 md:p-10 relative overflow-visible"
+      >
+        {/* Dekorasi Bintang Melayang di pojok Card */}
         <motion.div
-          animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute -top-6 -left-6 bg-brand-secondary p-3 rounded-2xl shadow-lg border-4 border-white text-brand-primary z-20"
+          animate={{ scale: [1, 1.3, 1], rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute -top-5 -right-5 bg-white p-3 rounded-2xl shadow-xl border-4 border-brand-secondary text-brand-secondary z-20"
         >
           <Star fill="currentColor" size={32} />
         </motion.div>
+
+        {/* Header: Logo Section */}
+        <div className="flex justify-between items-center mb-10">
+          <div className="w-16 h-16 overflow-hidden bg-indigo-50 border-4 border-dashed border-brand-primary/20 rounded-2xl flex items-center justify-center p-1 group hover:border-brand-primary transition-colors">
+            <Image
+              alt="logo-unisulla"
+              src={"/unisula.jpeg"}
+              width={100}
+              height={100}
+              className="w-full h-full rounded-2xl"
+            />
+          </div>
+
+          <motion.div
+            animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }}
+            transition={{ repeat: Infinity, duration: 3 }}
+            className="bg-yellow-100 p-4 rounded-full text-brand-secondary shadow-inner"
+          >
+            <Trophy size={32} />
+          </motion.div>
+
+          <div className="w-16 h-16 bg-yellow-50 border-4 border-dashed border-brand-secondary/20 rounded-2xl flex items-center justify-center p-1 group hover:border-brand-secondary transition-colors">
+            <Image
+              alt="logo-unisulla"
+              src={"/fkip.jpeg"}
+              width={100}
+              height={100}
+              className="w-full h-full rounded-2xl"
+            />
+          </div>
+        </div>
+
+        {/* Tengah: Judul Utama */}
+        <div className="text-center mb-12 flex-1 flex flex-col justify-center">
+          <motion.h1
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-none tracking-tighter"
+          >
+            MEDIA <span className="text-brand-primary">APLIKASI</span> <br />
+            <span className="text-brand-secondary drop-shadow-sm">
+              BANGUN DATAR
+            </span>
+          </motion.h1>
+
+          <div className="mt-8 flex items-center justify-center gap-4 bg-gray-50 py-3 px-8 rounded-full w-fit mx-auto border-2 border-gray-100 shadow-sm">
+            <Sparkles
+              size={22}
+              className="text-brand-secondary animate-pulse"
+            />
+            <p className="text-sm md:text-xl text-gray-600 font-black italic tracking-tight">
+              Ayo Jadi Jagoan Geometri! 🚀
+            </p>
+            <Sparkles
+              size={22}
+              className="text-brand-secondary animate-pulse"
+            />
+          </div>
+        </div>
+
+        {/* Bawah: Footer & Action Button */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-8 border-t-4 border-dashed border-gray-100">
+          <div className="flex items-center gap-5">
+            <div className="bg-brand-success/20 p-4 rounded-2xl text-brand-success shadow-sm">
+              <Rocket size={40} className="animate-bounce" />
+            </div>
+            <div className="text-left">
+              <h3 className="text-xl font-black text-gray-800 uppercase leading-none mb-1">
+                Siap Mulai?
+              </h3>
+              <p className="text-sm text-gray-400 font-bold uppercase tracking-wider">
+                Kumpulkan bintang pertamamu!
+              </p>
+            </div>
+          </div>
+
+          <Button
+            variant="secondary"
+            onClick={() => router.push("/auth")}
+            className="w-full sm:w-auto text-3xl py-6 px-12"
+            icon={<ChevronRight size={36} strokeWidth={4} />}
+          >
+            GAS POL!
+          </Button>
+        </div>
       </Card>
+
+      {/* Dekorasi Lantai */}
+      <div className="absolute bottom-0 w-full h-32 bg-white/5 -skew-y-2 transform translate-y-16 pointer-events-none" />
     </LayoutWrapper>
   );
 }
-
-const loginSchema = z.object({
-  fullName: z.string().min(3, "Nama lengkap minimal 3 huruf ya!"),
-  schoolName: z.string().min(2, "Nama sekolah jangan dikosongkan"),
-  grade: z.string().min(1, "Pilih kelasmu dulu"),
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
