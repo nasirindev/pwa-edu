@@ -3,13 +3,23 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Play } from "lucide-react";
-import { LayoutWrapper } from "@/components/AnimatedBackgroud";
+import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
+import { decorations } from "@/libs/decorations";
 
 export default function VideoPage() {
   const router = useRouter();
 
   return (
     <LayoutWrapper className="bg-yellow-50/30">
+      {decorations.map((decorations, idx) => (
+        <Decoration
+          key={idx}
+          icon={decorations.icon}
+          className={decorations.className}
+          animate={decorations.animate}
+          transition={decorations.transition}
+        />
+      ))}
       <div className="h-full w-full max-w-3xl flex flex-col p-6 relative space-y-6">
         {/* Tombol Kembali & Header */}
         <div className="flex items-center gap-4">
