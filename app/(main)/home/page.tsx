@@ -34,7 +34,12 @@ export default function HomePage() {
   };
 
   const menuItems = [
-    { title: "KIKD", icon: <Trophy />, path: "/kikd", color: "bg-blue-500" },
+    {
+      title: "Tujuan",
+      icon: <Trophy />,
+      path: "/kikd",
+      color: "bg-blue-500",
+    },
     {
       title: "PETUNJUK",
       icon: <HelpCircle />,
