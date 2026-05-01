@@ -6,7 +6,7 @@ import { ArrowLeft, ChevronLeft, ChevronRight, Trophy } from "lucide-react";
 import { Decoration, LayoutWrapper } from "@/components/AnimatedBackgroud";
 import { motion, AnimatePresence } from "framer-motion";
 import { decorations } from "@/libs/decorations";
-import { slides } from "@/libs/materi";
+import { slides } from "@/libs/slides";
 
 export default function MateriPage() {
   const router = useRouter();
