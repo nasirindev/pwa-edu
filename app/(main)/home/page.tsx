@@ -80,12 +80,23 @@ export default function HomePage() {
       ))}
       {/* Container utama dengan padding kecil agar muat di layar HP/Tablet */}
       <div className="h-full w-full flex flex-col p-6 relative lg:space-y-6 space-y-0">
-        <div className="min-h-[10vh]">
-          <div className="h-full bg-white border-[3px] md:border-4 border-gray-800 rounded-xl shadow-[4px_4px_0px_#1f2937] flex items-center justify-center p-2 md:p-6">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-gray-800 tracking-widest md:tracking-[0.2em] uppercase transform">
+        <div className="min-h-[10vh] flex">
+          <div className="h-full bg-white border-[3px] md:border-4 border-gray-800 rounded-xl shadow-[4px_4px_0px_#1f2937] text-center p-2 md:p-6 flex-1">
+            <h1 className="text-xl md:text-3xl font-black text-gray-800 tracking-widest md:tracking-[0.2em] uppercase transform">
               Menu
             </h1>
           </div>
+          {/* logout */}
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={handleLogout}
+            className="h-full bg-red-500 border-[3px] md:border-4 border-gray-800 rounded-xl shadow-[4px_4px_0px_#1f2937] text-center p-2 md:p-6"
+          >
+            <h1 className="text-xl md:text-3xl font-black text-gray-800 tracking-widest md:tracking-[0.2em] uppercase transform">
+              lOGOUT
+            </h1>
+          </motion.button>
         </div>
         <div className="grid grid-cols-2 grid-rows-3 gap-2 md:gap-4 flex-3 h-full min-h-[10vh]">
           {menuItems.map((item, idx) => (
