@@ -6,6 +6,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL=file:./edu.db
+      # Gunakan path absolut di dalam container
+      - DATABASE_URL=file:/app/data/edu.db
     volumes:
-      - ./edu.db:/app/edu.db
+      # Arahkan ke folder, bukan langsung ke file agar lebih stabil
+      - nextjs_db_data:/app/data
+
+volumes:
+  nextjs_db_data:
