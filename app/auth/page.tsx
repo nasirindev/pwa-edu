@@ -91,6 +91,11 @@ export default function LoginPage() {
         transition={{ duration: 5, repeat: Infinity }}
       />
 
+      <Decoration
+        icon={<Circle size={50} fill="currentColor " />}
+        className={""}
+      />
+
       {/* --- KARTU LOGIN --- */}
       <Card maxWidth="max-w-md" noPadding className="overflow-visible">
         {/* Header Kartu dengan Animasi */}
@@ -157,7 +162,7 @@ export default function LoginPage() {
               className="w-full text-2xl py-6 rounded-4xl"
               icon={<LogIn size={28} strokeWidth={3} />}
             >
-              GAS BELAJAR!
+              Selanjutnya
             </Button>
           </div>
         </form>

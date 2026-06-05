@@ -35,13 +35,13 @@ export default function HomePage() {
 
   const menuItems = [
     {
-      title: "Tujuan",
+      title: "manfaat media",
       icon: <Trophy />,
       path: "/kikd",
       color: "bg-blue-500",
     },
     {
-      title: "PETUNJUK",
+      title: "pedoman pengguna",
       icon: <HelpCircle />,
       path: "/petunjuk",
       color: "bg-green-500",

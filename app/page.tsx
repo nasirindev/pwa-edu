@@ -112,7 +112,7 @@ export default function WelcomePage() {
             animate={{ scale: 1, opacity: 1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-none tracking-tighter"
           >
-            MEDIA <span className="text-brand-primary">APLIKASI</span> <br />
+            MEDIA <span className="text-brand-primary">ANIMASI</span> <br />
             <span className="text-brand-secondary drop-shadow-sm">
               BANGUN DATAR
             </span>
@@ -124,7 +124,7 @@ export default function WelcomePage() {
               className="text-brand-secondary animate-pulse"
             />
             <p className="text-sm md:text-xl text-gray-600 font-black italic tracking-tight">
-              Ayo Jadi Jagoan Geometri! 🚀
+              Ayo Belajar Bersama! 🚀
             </p>
             <Sparkles
               size={22}
@@ -155,7 +155,7 @@ export default function WelcomePage() {
             className="w-full sm:w-auto text-3xl py-6 px-12"
             icon={<ChevronRight size={36} strokeWidth={4} />}
           >
-            GAS POL!
+            MULAI
           </Button>
         </div>
       </Card>
