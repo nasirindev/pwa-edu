@@ -12,12 +12,20 @@ export default function TujuanPage() {
 
   const objectives = [
     {
-      text: "Peserta didik dapat menerima pemahaman materi dengan  menarik dan komunikatif, sehingga dapat  meningkatkan keaktifan pembelajaran didalam kelas.",
+      text: "Peserta didik mampu menyebutkan 8 bentuk bangun datar",
       icon: <Star className="text-yellow-500" />,
     },
     {
-      text: "b)	Sebagai pemicu dalam meningkatkan semangat belajar peserta didik, sehingga mampu meningkatkan kemampuan berpikir kritis peserta didik pada mata pelajaran matematika.",
+      text: "Peserta didik mampu menjelaskan ciri-ciri masing-masing bangun datar",
       icon: <CheckCircle2 className="text-green-500" />,
+    },
+    {
+      text: "Peserta didik mampu mengidentifikasi benda di sekitar berdasarkan bentuk bangun datar",
+      icon: <Target className="text-red-500" />,
+    },
+    {
+      text: "Peserta didik mampu membuat proyek sederhana berupa kolase atau poster yang memanfaatkan berbagai bentuk bangun datar secara kreatif",
+      icon: <Star className="text-purple-500" />,
     },
   ];
 
@@ -45,7 +53,7 @@ export default function TujuanPage() {
           </button>
           <div className="flex-1 bg-white border-[3px] border-gray-800 rounded-xl shadow-[4px_4px_0px_#1f2937] p-3 text-center">
             <h1 className="text-lg md:text-xl font-black text-gray-800 uppercase tracking-tight">
-              Tujuan
+              Manfaat
             </h1>
           </div>
         </div>

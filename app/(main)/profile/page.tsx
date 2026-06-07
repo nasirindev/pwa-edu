@@ -83,25 +83,25 @@ export default function ProfilePage() {
             </div>
 
             {/* Konten Utama - Grid 2 Kolom untuk menghemat ruang vertikal */}
-            <div className="flex-1 flex gap-6 items-start overflow-hidden pt-2">
+            <div className="flex-1 flex gap-6 items-stretch overflow-hidden pt-2">
               {/* Sisi Kiri: foto pembuat */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="w-1/3 flex flex-col items-center space-y-4"
+                className="w-1/3 min-w-[90px] sm:min-w-[120px] md:min-w-[150px] h-full"
               >
-                <div className="w-24 h-24 md:w-32 md:h-32 bg-orange-400 border-4 border-gray-800 rounded-full flex items-center justify-center shadow-[4px_4px_0px_#1f2937] overflow-hidden relative">
+                <div className="w-full h-full bg-orange-400 border-4 border-gray-800 rounded-2xl flex items-center justify-center shadow-[6px_6px_0px_#1f2937] overflow-hidden relative">
                   {/* GANTI src DI BAWAH DENGAN FILE FOTO PEMBUAT (Simpan file foto Anda di folder /public) */}
                   <img
-                    src="https://api.dicebear.com/7.x/adventurer/svg?seed=Fitriana"
+                    src="/profile.jpeg"
                     alt="Foto Pembuat"
-                    className="w-full h-full object-cover z-10"
+                    className="w-full h-full object-cover object-top z-10"
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}
                   />
                   {/* Fallback Icon jika foto pembuat belum ada / gagal dimuat */}
-                  <User size={60} className="text-white absolute" />
+                  <User size={60} className="text-white absolute animate-pulse" />
                 </div>
               </motion.div>
 
